@@ -1,0 +1,99 @@
+Problema 
+//PostgreSQL Bloat lk_dialog
+
+-Se corro primero el vaccum en el query tool del pgadmin.wapsite.com
+vacuum full public.bill_responses
+vaccum full ph_smart_sun.bill_service 
+
+vacuum full dev.subscriptions
+reindex dev.attemp_idx_uq
+reindex dev.msisdn_service_uq
+
+-Despues se tiene que parar el billing de la mp
+
+-Se tiene que indexar los indices de la  tabla de nuevo
+Ejemplos
+reindex index public.idx_r_createdat
+reindex index public.idx_r_result
+
+reindex index public.nombre_del_indice 
+
+Ejemplos
+vacuum full dev.bill_responses
+
+reindex index dev.idx_o_createdat
+reindex index dev.idx_o_msisdn
+//
+vacuum full ph_smart_sun.bill_service 
+reindex index ph_smart_sun.idx_bill_service_1
+reindex index ph_smart_sun.idx_bill_service_active
+reindex index ph_smart_sun.idx_bill_service_status
+//
+vacuum full ph_smart_sun.suspend 
+reindex index ph_smart_sun.idx_suspend_created_at
+reindex index ph_smart_sun.suspend_pk
+//
+vacuum full dev.bill_responses
+reindex index dev.idx_r_code
+reindex index dev.idx_r_createdat
+//
+--------------------------------------------------------------------------------
+
+vacuum full cron_barman.crontab;
+vacuum full auto_tasks.execution_history;
+
+vacuum analyze cron_barman.crontab;
+vacuum analyze auto_tasks.execution_history;
+
+---------------------------------------------------------------------------------
+
+//Problema de ANALYZE en monitor y como arreglarlo
+/* bcron /
+vacuum analyze cron_barman.crontab;
+vacuum analyze cron_dba.crontab;
+vacuum analyze cron_operations.crontab;
+/ pg-lkdialog pglogical */
+vacuum analyze pglogical.depend;
+vacuum analyze pglogical.local_node;
+vacuum analyze pglogical.local_sync_status;
+vacuum analyze pglogical.node;
+vacuum analyze pglogical.node_interface;
+vacuum analyze pglogical.queue;
+vacuum analyze pglogical.replication_set;
+vacuum analyze pglogical.replication_set_seq;
+vacuum analyze pglogical.replication_set_table;
+vacuum analyze pglogical.sequence_state;
+vacuum analyze pglogical.subscription;
+
+Ejemplos
+vacuum analyze public.globalsparams;
+vacuum analyze mobiera.logical_deletable;
+vacuum analyze mobiera.auditable;
+vacuum analyze mobiera.base;
+
+vacuum analyze singtel.user_identifier;
+vacuum analyze singtel.base;
+vacuum analyze singtel.auditable;
+vacuum analyze singtel.logical_deletable;
+
+vacuum analyze tpay.transaction_type;
+vacuum analyze tpay.auditable;
+vacuum analyze tpay.logical_deletable;
+vacuum analyze tpay.base;
+
+vacuum analyze ketelkom.transaction_type;
+vacuum analyze ketelkom.auditable;
+vacuum analyze ketelkom.base;
+vacuum analyze ketelkom.logical_deletable;
+
+----------------------------------------------------------
+
+https://momjian.us/main/writings/pgsql/aw_pgsql_book/node285.html
+
+
+------------------------------------------------------------------------------------------
+Jobs del bcron Postgres
+--/vols/bcron/dba/cmd
+
+
+

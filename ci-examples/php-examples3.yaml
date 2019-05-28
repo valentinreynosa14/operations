@@ -1,0 +1,33 @@
+variables:
+  RELEASE_ROOT_DIR: /mcp/releases/marketinghub
+  DEPLOY_DIR: /var/www/marketinghub
+
+deploy_master:
+  stage: deploy
+  script:
+    # INITIALIZE VARIABLES
+    - CTAG=`git describe --tags --abbrev=0`
+    - CURRENT_RELEASE_DIR="$RELEASE_ROOT_DIR/$CTAG"
+
+    # INSTALL DEPENDENCIES
+    - composer clearcache
+    - composer install
+
+    # RELEASE DIR
+    - ssh platform@159.69.21.194 mkdir -p $CURRENT_RELEASE_DIR
+    - rsync -ratv $(pwd)/ platform@159.69.21.194:$CURRENT_RELEASE_DIR/ | sed '0,/^$/d'
+    - ssh platform@159.69.21.194 cp $CURRENT_RELEASE_DIR/.env.production $CURRENT_RELEASE_DIR/.env
+
+    # DEPLOY DIR
+    - ssh platform@159.69.21.194 rsync -ratv $CURRENT_RELEASE_DIR/ $DEPLOY_DIR/ | sed '0,/^$/d'
+    - ssh platform@159.69.21.194 sudo chmod -R 777 $DEPLOY_DIR/storage
+
+    # GENERATE LINK
+    - ssh platform@159.69.21.194 "cd $DEPLOY_DIR && php artisan storage:link"
+
+  only:
+    - tags
+  tags:
+    - master
+  environment: production
+

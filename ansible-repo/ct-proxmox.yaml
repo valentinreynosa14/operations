@@ -1,0 +1,30 @@
+---
+- hosts: nodo
+  tasks:
+###
+# Creation of a CT with ansible in proxmox.
+###
+    - proxmox:
+        node: 'px01'
+        api_user: 'root@pam'
+        api_password: 'binbit123'
+        api_host: 'px01'
+        password: 'binbit'
+        hostname: 'mpcrotele2'
+        cpus: 4
+        disk: 10
+        memory: 4000
+        storage: ceph11
+        searchdomain: binbit.com
+        nameserver: 192.168.13.33
+        netif: '{"net0":"name=eth0,bridge=vmbr2"}'
+        ostemplate: 'local:vztmpl/Ubuntu-16.04-ansible.tar.gz'
+###
+# Se inicia el container
+###
+    - proxmox:
+        hostname: 'mpcrotele2'
+        api_user: 'root@pam'
+        api_password: 'binbit123'
+        api_host: 'px01'
+        state: started

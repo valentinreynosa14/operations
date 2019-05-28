@@ -1,0 +1,8 @@
+---
+- hosts: microplat
+  tasks:
+  - name: Remove users from servers
+    user:
+      name: username
+      state: absent
+

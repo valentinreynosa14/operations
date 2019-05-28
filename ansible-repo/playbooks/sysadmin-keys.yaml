@@ -1,0 +1,63 @@
+---
+###
+# Se agregan keys de sysadmins
+###
+- hosts: microplat
+  become: yes
+  tasks:
+    - name: Ensure sysadmin group exists
+      group: name=sysadmin state=present
+
+    - name: Ensure sysadmin users can sudo without password
+      lineinfile: "dest=/etc/sudoers state=present regexp='^%sysadmin' line='%sysadmin ALL=(ALL) NOPASSWD: ALL'"
+
+    - name: Adding users
+      user: name=alan state=present comment="amuniz@binbit.com" groups=sysadmin append=yes shell=/bin/bash
+    - name: Adding authorized_keys
+      authorized_key: user=alan key="ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC98mBXPIwpsZMsiQo+LAW3fHUeoCfx6E8osRvTHH4vsK5OQttgn3857FkUYYbFVjdDB8t8RMGFxdml5WalPvV8ADOm3sr4shBODHPdq1TPwo43tstB03zNo1fHhZMl6HpISzKQUwPNSt9HgYHWPvxM+Dn+LQzp8TIqFDKEw6K5tAE1uDpzXiNGATZwKPzQy7JOCqfJZNUny8mBn2mJERnkmamjaP81vk8lW62HdDXxxorKcjyyjkcIlVIS1udm9fYXDYsLscplNhI/8ONHhc7ayFmin0lywnVk+QC/NK+4+YkV3xoMRQ+2XAuFMZSI8finBiYQsunqlClkbzYcgA9B alan" exclusive=true
+
+    - name: Adding users
+      user: name=cristian state=present comment="cgonzalez@binbit.com" groups=sysadmin append=yes shell=/bin/bash
+    - name: Adding authorized_keys
+      authorized_key: user=cristian key="ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDRtsIP4YSbVhwx0SE3v+rPi+S9xhSGCeD6whI+Cj+NRA/sBtb4s19a7gTM/Ab6+Zv1ldKclBGipxUSQCR5hRPv3BnwAVhK+n6oEpP2/12pz48hQpgiB8vwqkiZ4n+m/idcRekfify3YR3hue4sECZHxsMLW7TuNkwF1S5luHzwCE+0vuZYRx79+PnnG5Y7fdSZUAhXxie+KY6HQC87Cf9I06/mo4HoJLz6tNUrifC4Yty4OUbJR0PyBgvUAq2gn+RqnHZzLyl6dvQ60Kpwrs3kpy3qQqKVPymmEB7hdB7RDROExuxhm+OTH7+eg76V7dq+YxrWcezf9400tU9pR8cv cristian@Cristians-MacBook-Pro.local" exclusive=true
+
+    - name: Adding users
+      user: name=mbegerez state=present comment="mbegerez@binbit.com" groups=sysadmin append=yes shell=/bin/bash
+    - name: Adding authorized_keys
+      authorized_key: user=mbegerez key="ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC0kMVzK8lDvyTysLor7Wu9hg23z0+6SXLMs7kypFxN9QFm2kZLFStt+A5Qj7gcxCneo8A5E4wvYVdR3qvbUWTkkPaoe221iYMGRt175aHLcsejhv8esZ+sbY4hk+8zrhrTKBB55WBd25OFMXy2yDDADTSzfMlXKA3ZanI/cCwAsSDUNIunh/H+T9V5gUcG0JNjygEazn0nQnMXNQO23EFl9ITSV46tO2DDQxHkcdkBzsoRI0hbNaYuycaD3yvzUFE16HkEYof1VxKg6hShtuX6WKTuSOG7Kijro8c1SZTRsCjHkWm4UR8PD/LrhuorejHeYAwWzhuNAWB+jDJlIBEv mbegerez@padawan.local" exclusive=true
+
+    - name: Adding users
+      user: name=grotger state=present comment="grotger@binbit.com" groups=sysadmin append=yes shell=/bin/bash
+    - name: Adding authorized_keys
+      authorized_key: user=grotger key="ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCovhVsllgiSmPa79bDUMlaxrY4EhLxE9AGpvVYLFoCaaDpOVjORQ4Thp9SpczIuTCsb0lpzDeLqSnmjR6yI2F5oat5PKUDfJ46nEWwG5Bc9ULe8vBaO4SFEbmL9U3q/falbLMF+mNbw8/jUeA2ueqvJ7p7GC6PcjHTOfXU8uDhhE/013Tqx9HRUvEJ/PbWokv4CfdC3ZmQXQOmOrloGr1yzdC9GR/qWvyQaE9wO7WdUAUe3Va4+C5HbZkjugk3lNmrc4FXoLgaHelp5wwrMdMtg54MDbVFLQtIYMzBcJC1xHFnZzyCnRs9XIwxFJaiYEHSswq78wmQv6Aq6YB3U7J1 root@debian.wapsite.com" exclusive=true
+
+    - name: Adding users
+      user: name=vreynosa state=present comment="vreynosa@binbit.com" groups=sysadmin append=yes shell=/bin/bash
+    - name: Adding authorized_keys
+      authorized_key: user=vreynosa key="ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDelf94lmeFPeTzbz0+SARAxKQPga0MCCdhPaMu2V07r0IypI5GxzomotenctvZk0nhe+LvTBAxO5LUffdv8+4e7N5kK4K3dXpmPv8Ff0dF/82Y+RqOxdgrgg/71rfSLMGFQnnjHil6TtsU5EuRr2LFdkBHP1TbXFIM8SrcjwHxwxWq8ZY8FVaxFI6EgnPUjY6dU0LNVaLz9JVccDZJG7BpZD0rr49IT4o/Bh/QilkrOlkEE7oA9COlRftdrQ9XUGVOVDQ/OCmKMB5MtC/fillE0fI+oJRlMF9nErhhBxKRgBmf2L3I4V6c0umLuwf0yjFZTvwnEpB7CS4uAC6b9ANp root@vreynosa-HP-Notebook" exclusive=true
+      
+    - name:  Adding user
+      user:  name=platform state=present comment="platform@binbit.net" groups=sysadmin append=yes shell=/bin/bash
+    - name: Adding authorized_keys
+      # Dependiendo la llave que necesites descomenta desde #authorized_key  para usar esa key.
+      ###
+      # Production key / gitlab.binbit.com
+      ###
+      #authorized_key: user=platform key="ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC62nOXhX0QmiO2xhDvvtZ/VBlAEx9RqP15IUMk2OdRyBa9u6KEjUxO2SPvKbMo7jCBcqBRzsamM5/0GvrsGu7BbaPKp8L/GrzHkPw9tixEF0xecG/Sd4l2Ve05umasM2djr+/BrWkdhi/IWjPnuFsFjVXj52kndX7zPoIV8eVK2P86WW/aG203JaO967BUyUnJwDaCVtKxtxKJpWd59dRXQ1gMVJR/+hl0GGJDZnJ1x4wNNGqcTAs1XCxyp0Wv+YFsNZ27mnGHAi2NNfsMX0mK2QKaf+tLBPdNs4JfI0Dxozj7XO7zEm3DP2Hiw60Z72rN7ml5W16CQilTkrpWCwqN gitlab-runner@gitlabrun" exclusive=true
+      
+      ###
+      #Integration / Dev key   /  gitlab.binbit.com
+      ###
+      #authorized_key: user=platform key="ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDMs9Q/1tyj2gUzlnQMPHkXDuSZV8hjtn6CQoZ5DNiCMIQwqOQvdhR1c4yKAizj9sfMUTY71V1rnhfJz7c5ghAIthPEQr5a/LHq53L1LhI6NvJ2paqsqEgTgK8bO5M34tUWMRXSVUPFVtVa5DgR32DAO+c4tZbCKIXOJzysfZrBaSxX45ek/3wv1uZhayWCinAVgjjsKosj3K2gTRYuoBDoc32jqN0hmOuFKMIx6MMmgDsB93SQgz06GAErolkfre0j0PMsknqpfUnq8E06vnzFCrV/8FFpIp8xjo3iGO/m54I9zzSLMYG5c9BtD1j/5lvRkkZ+GZito8HiEQ9i9Jlz gitlab-runner@pgcoreint.binbit.com" exclusive=true
+      
+      ###
+      # production key // cloud gitlab
+      ###
+      #authorized_key: user=platform key="ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDMs9Q/1tyj2gUzlnQMPHkXDuSZV8hjtn6CQoZ5DNiCMIQwqOQvdhR1c4yKAizj9sfMUTY71V1rnhfJz7c5ghAIthPEQr5a/LHq53L1LhI6NvJ2paqsqEgTgK8bO5M34tUWMRXSVUPFVtVa5DgR32DAO+c4tZbCKIXOJzysfZrBaSxX45ek/3wv1uZhayWCinAVgjjsKosj3K2gTRYuoBDoc32jqN0hmOuFKMIx6MMmgDsB93SQgz06GAErolkfre0j0PMsknqpfUnq8E06vnzFCrV/8FFpIp8xjo3iGO/m54I9zzSLMYG5c9BtD1j/5lvRkkZ+GZito8HiEQ9i9Jlz gitlab-runner" exclusive=true      
+      
+      ###
+      # integration // cloud gitlab
+      ###
+      #authorized_key: user=platform key="" exclusive=true      
+      
+      

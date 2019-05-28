@@ -1,0 +1,30 @@
+variables:
+  RELEASE_ROOT_DIR: /platform/releases/pypersonal
+  DEPLOY_DIR: /var/www/py_personal
+
+deploy_master:
+  stage: deploy
+  script:
+    # INITIALIZE VARIABLES
+    - CTAG=`git describe --tags --abbrev=0`
+    - CURRENT_RELEASE_DIR="$RELEASE_ROOT_DIR/$CTAG"
+    
+    # INSTALL DEPENDENCIES
+    - composer clearcache
+    - composer update
+    
+    # RELEASE DIR
+    - ssh platform@py.personal.wapsite.com mkdir -p $CURRENT_RELEASE_DIR
+    - rsync -ratv $(pwd)/ platform@py.personal.wapsite.com:$CURRENT_RELEASE_DIR/ | sed '0,/^$/d'
+    - ssh platform@py.personal.wapsite.com cp $CURRENT_RELEASE_DIR/.env.prod $CURRENT_RELEASE_DIR/.env
+
+    # DEPLOY DIR
+    - ssh platform@py.personal.wapsite.com rsync -ratv $CURRENT_RELEASE_DIR/ $DEPLOY_DIR/ | sed '0,/^$/d'
+    - ssh platform@py.personal.wapsite.com sudo chmod -R 777 $DEPLOY_DIR/storage
+
+  only:
+    - tags
+  tags:
+    - master
+  environment: production
+

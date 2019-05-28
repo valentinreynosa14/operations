@@ -1,0 +1,26 @@
+---
+- hosts: microplat
+  
+
+  tasks:
+  
+  - name: install rabbitmq packages
+    apt:
+      pkg:
+       - rabbitmq-server
+      state: present
+
+  - name: rabbitmq start service 
+    command: rabbitmqctl start_app
+
+  - name: add user to rabbitmq service 
+    command: rabbitmqctl add_user admin BinBitMx18
+
+  - name: user tags
+    command: rabbitmqctl set_user_tags admin administrator
+
+  - name: set user permissions
+    command: rabbitmqctl set_permissions -p /  admin ".*" ".*" ".*"
+
+  - name: enable plugins 
+    command: rabbitmq-plugins enable rabbitmq_management

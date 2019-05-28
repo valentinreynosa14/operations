@@ -1,0 +1,19 @@
+---
+- hosts: microplat
+
+  tasks:
+  - name: update apt
+    apt: update_cache=yes
+
+  - name: make sure that the /data/firewall exists
+    file: path=/data/firewall state=directory mode=0755 
+
+  - name: copy IP_ALLOWED.txt file
+    copy: src=/etc/ansible/ansible-sysadmin/templates/IP_ALLOWED.txt dest=/data/firewall   
+
+  - name: copy fw.sh file
+    copy: src=/etc/ansible/ansible-sysadmin/templates/fw.sh mode=0777 dest=/data/firewall
+
+  - name: run fw.sh script
+    script: /etc/ansible/ansible-sysadmin/templates/fw.sh
+

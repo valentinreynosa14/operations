@@ -1,0 +1,68 @@
+--- 
+
+- hosts: microplat
+
+  tasks:
+
+    - name: "Add repository for PHP 7.2"
+      apt_repository:
+        repo="ppa:ondrej/php"
+        update_cache=yes
+
+    - name: LEMP stack installation
+      apt:
+        pkg:
+          - software-properties-common
+          - nginx
+          - php7.2-fpm
+          - php7.2-bcmath
+          - php7.2-bz2
+          - php7.2-curl
+          - php7.2-dba
+          - php7.2-enchant
+          - php7.2-gmp
+          - php7.2-imap
+          - php7.2-mbstring
+          - php7.2-zip
+          - php7.2-tokenizer
+          - php-bcmath
+          - php-bz2
+          - php-enchant
+          - php-imap
+          - php7.2-zip
+          - php7.2-mysql
+          - php7.2-gd
+          - php7.2-pgsql
+          - php7.2-mongodb
+          - php7.2-xml
+          - php7.2-curl
+          - php7.2-ftp
+          - composer
+          - git
+          - zip
+          - htop
+          - iftop
+          - mysql-client
+        state: present
+
+      
+    - name: copy nginx vhost template 
+      copy: src=/etc/ansible/ansible-sysadmin/templates/nginx-example.conf dest=/etc/nginx/sites-enable/
+
+      #- name: reload nginx service 
+      #service: name=nginx state=restarted  
+
+    - name: copy php pools file
+      copy: src=/etc/ansible/ansible-sysadmin/templates/pool-example.conf dest=/etc/php/7.2/fpm/pool.d
+
+      
+    ##
+    # cambiar resolv.conf
+    ##
+    #- copy:
+    #    src:    ../templates/resolv.conf
+    #    dest:   /etc/
+    #    owner:  root
+    #    group:  root
+    #    mode:   0644 
+

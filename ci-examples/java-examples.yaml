@@ -1,0 +1,39 @@
+image: java:8
+
+variables:
+  DEPLOY_DIR: /platform/deploy/micro_platforms/pe_entel
+  CURRENT_VERSION: /platform/release/micro_platforms/pe_entel/current_version
+  OLD_VERSION: /platform/release/micro_platforms/pe_entel/old_version
+  
+deploy_master:
+  stage: deploy
+  script:
+    - ctag=`git describe`
+    - ./gradlew assemble
+    - ssh platform@pe.entel.wapsite.com cp -a $CURRENT_VERSION/. $OLD_VERSION
+    - scp build/libs/pe*.jar platform@pe.entel.wapsite.com:/$CURRENT_VERSION/
+    - ssh platform@pe.entel.wapsite.com "cd $CURRENT_VERSION/ | echo '$ctag' > version.txt"
+  only:
+    - tags
+  tags:
+    - master
+  environment: production
+  
+
+
+build_dev:
+  stage: deploy
+  script:
+    - ctag=current
+    - ./gradlew assemble
+    - rm -fr $DEPLOY_DIR/$ctag/pe_entel
+    - mkdir -p $DEPLOY_DIR/$ctag/pe_entel
+    - cp -R * $DEPLOY_DIR/$ctag/pe_entel
+    - cd $DEPLOY_DIR/$ctag/pe_entel/
+    #- ./javaserver.sh restart integration
+  only:
+    - dev
+  tags:
+    - dev
+  environment: dev
+

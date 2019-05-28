@@ -1,0 +1,9 @@
+`INSTALACION DEL RABBIT`
+```
+apt-get install rabbitmq-server
+rabbitmqctl start_app
+rabbitmqctl add_user admin BinBitMx18
+rabbitmqctl set_user_tags admin administrator
+rabbitmqctl set_permissions -p /  admin ".*" ".*" ".*"
+rabbitmq-plugins enable rabbitmq_management
+```

@@ -1,0 +1,10 @@
+[program:mkthub-worker]
+process_name=%(program_name)s_%(process_num)02d
+command=php /var/www/marketinghub/artisan queue:listen --queue=marketinghub --timeout=0 --tries=1
+autostart=true
+autorestart=true
+user=www-data
+directory=/var/www/marketinghub
+numprocs=16
+redirect_stderr=true
+stdout_logfile=/var/log/appserver/mkthub-worker.log

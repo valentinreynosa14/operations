@@ -1,0 +1,32 @@
+variables:
+  RELEASE_ROOT_DIR: /platform/releases/ansible
+  DEPLOY_DIR: /etc/ansible/ansible-sysadmin
+
+deploy_master:
+  stage: deploy
+  script:
+    # INITIALIZE VARIABLES
+    - CTAG=`git describe --tags --abbrev=0`
+    - CURRENT_RELEASE_DIR="$RELEASE_ROOT_DIR/$CTAG"
+    
+    - ifconfig
+    - whoami
+    - echo $PWD
+    
+    # RELEASE DIR
+    - ssh platform@159.69.216.199 mkdir -p $CURRENT_RELEASE_DIR
+    - rsync -ratv $(pwd)/ platform@159.69.216.199:$CURRENT_RELEASE_DIR/ | sed '0,/^$/d'
+    - ssh platform@159.69.216.199 rm -rf /etc/ansible/ansible-sysadmin
+    - ssh platform@159.69.216.199 cp -r $CURRENT_RELEASE_DIR/ $DEPLOY_DIR/
+    - ssh platform@159.69.216.199 rm -rf $DEPLOY_DIR/$CTAG
+
+    # DEPLOY DIR
+    - ssh platform@159.69.216.199 rsync -ratv $CURRENT_RELEASE_DIR/ $DEPLOY_DIR/ | sed '0,/^$/d'
+ 
+
+  only:
+    - tags
+  tags:
+    - master
+  environment: production
+

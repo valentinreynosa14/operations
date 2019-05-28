@@ -1,0 +1,33 @@
+- hosts: microplat
+
+  vars:
+    mysql_root_pass: binbit123
+
+  tasks:
+  - name: ensure apt cache is up to date
+    apt: update_cache=yes
+
+  - name: install mysql package
+    apt:
+      pkg:      
+       - mysql-client
+       - mysql-common
+       - mysql-server
+       - python-mysqldb
+      state: present    
+
+  - name: MySQL | restart mysql
+    service: name=mysql state=restarted
+    become: true
+
+  - name: Set MySQL root password before installing
+    debconf: name='mysql-server' question='mysql-server/root_password' value='{{mysql_root_pass | quote}}' vtype='password'
+
+  - name: Confirm MySQL root password before installing
+    debconf: name='mysql-server' question='mysql-server/root_password_again' value='{{mysql_root_pass | quote}}' vtype='password'
+
+  #- name: MySQL | Delete anonymous MySQL server user for {{ server_hostname }}
+  #  mysql_user: name="" host="{{ server_hostname }}" state="absent" login_user=root login_password={{ mysql_root_password }}
+
+  #- name: MySQL | Remove the MySQL test database
+  #  mysql_db: db=test state=absent login_user=root login_password={{ mysql_root_password }}

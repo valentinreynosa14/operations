@@ -1,0 +1,740 @@
+--find . -size +50M--Encontrar archivos con mas de 50M
+--cat /etc/*-release---info del distro del server
+--df -h---Disco duro de un server
+--lshw | less--verificar la informacion de la distro o instancia
+--du-h "path"--checar cuanto pesa el document root o cualquier path
+--passwd root--cambiar contraseña a usuarios
+--grep ^processor /proc/cpuinfo | wc -l--cantidad de procesadores que corren en un server
+--stat -c '%Y %n' * | sort -k1,1nr | head -5 --es para ver los ultimos 5 archivos del directorio
+--watch -n1 "netstat -anpt|grep apache2|grep ESTABLISHED|cut -b45-60|cut -d':' -f1|uniq -c"--ver los hits de las ip's que estan en el server
+--tar xvjf filename.tar.bz2---descompirmir archivos tar.bz
+--last--las ultimas sesiones que han estado dentro del server y quien sigue logeado
+--curl -sL https://raw.githubusercontent.com/richardforth/apache2buddy/master/apache2buddy.pl | perl--apachebuddy nos sirvve para mejorar las metricas en optimizacion de apache
+--https://www.linode.com/docs/databases/mysql/how-to-optimize-mysql-performance-using-mysqltuner---para ver las metricas de mysql
+--csf -a ip--para agregar una ip a csf
+--mailq--para verificar si un archivo esta en cola
+--whereis= es para encontrar archivos relacionados con algo
+--curl checkip.amazonaws.com --checar la ip real de la insatncia en amazon
+--gzip -d---para descomprimir archivos con .gz
+--aws s3 sync uploads/ s3://lopezdorigabucket/uploads/ --comando para hacer rsync
+--aws s3 ls s3://lopezdorigabucket/uploads/2017/10/ | wc -l --ver el contenido de una carpeta
+--aws s3 cp heraldomexico.tar.gz s3://heraldobucket/---copiar elementos al bucket
+--s3 sync dbbackups s3://heraldobucket/---tambien el sync se utiliza para mandar contenido de toda una carpeta
+--screen----para dejar trabajos en segun plano
+--screen -r---ves los screen que estan corriendo
+--http://tools.seobook.com/robots-txt/--robot.txt para cambiar o delegar la entrada a los bots en el server
+--https://myonlineusb.wordpress.com/2011/06/19/how-to-convert-certificates-between-pem-der-p7bpkcs7-pfxpkcs12/--conversiones para las diferentes extensiones de certificados
+--iptables -A INPUT -p tcp -m tcp --sport 443 -j ACCEPT--abrir un puerto
+--iptables -A OUTPUT -p tcp -m tcp --dport 443 -j ACCEPT---es el in y out de un puerto
+--pkill nombredelproceso
+--ssh-keygen---para generar una llave rsa
+--php artisan cache:clear--comando para limpiar cache en laravel
+--netstat -anp | grep :80 | wc -l--ver procesos corriendo
+--stress -c numerodenucleosquetengaelserver---sirve para hacer pruebas directas al server para autosaling
+--SHOW FULL PROCESSLIST\G--usar en la terminal de mysql para ver que tablas esta usando mas procesos
+--sftp "ishturman@gmail.com"@"sftp.presslabs.net"--conectarme al usuario sftp desde terminal
+--reget -r 11 .--sincronizar contenido, estar en la capeta en la que se quiere mandar
+--mv * .. --mover todo una carpeta hacia atras
+--grep -r "[@]*include[[:space:]]\{1,\}\"\\\.*\";" --para encontrar malware
+--ufw allow from 159.69.23.12 to any port 27017 --abrir el puerto especifico de una ip
+--ufw allow from 185.36.144.3 to any port 13013
+--ufw status numbered----ver todas las reglas enumeradas en ufw
+--ufw delete numeroderegla----para borrar reglas de ufw
+--ufw allow from 185.36.144.3--agregar ip desde el fw
+--iptables -A INPUT -s 159.69.23.12 -j ACCEPT --whitelistear una ip
+--iptables -A INPUT -s 79.122.103.14 -j DROP --blacklistear una ip
+--cat /proc/cpuinfo--ver la informacion del kernel del servidor, cpu,ram
+--lscpu--ver la informacion del kernel resumida
+--netstat -putano | grep redis | wc -l -- comando para ver cuantas conexiones hay en redis
+--haproxy -f /etc/haproxy/haproxy.cfg -c--checar sintaxis en la configuracion de haproxy
+--nc -vz 41.203.65.65 8888 checar conexiones por TCP
+--nmap -Pn virginiatest.calawrdqa2kw.us-east-1.rds.amazonaws.com--checar latencia
+--timedatectl list-timezones --enlistar los paises y usos horarios
+--timedatectl set-timezone Asia/Manila --ejemplo
+--timedatectl set-timezone Etc/UTC--cambiar de zona horaria en el server a UTC
+--supervisorctl status---ver los procesos que esta corriendo el supervisor
+--supervisorctl restart tracking-celery-- reiniciar proceso de supervisor sin cargarte todo
+--watch supervisorctl status--ver en tiempo real el track de un proceso
+--tail -f globalmovie.com-access.log | cut -d ' ' -f 1--comando para saber las ip del access log
+--tar jxf php-5.4.28.tar.bz2--descomprimir paquetes con .tar.bz2
+--iftop--ver conexiones en tiempo real
+--netstat -tanp | grep -i estab--ver conexciones tcp vivas
+--curl icanhazip.com--saber ip publica de un server
+--named-checkconf /etc/named.conf--checar sintaxis del bind de dns
+--mongo -u user -p M0nGo.%18 --authenticationDatabase basededatos
+--hostnamectl set-hostname mpclentel-kvm NEW_NAME_HERE--cambiar el hostname permanentemente de un server
+--ps aux --sort -rss | head -10--ver los procesos que estan consumiendo mas memoria
+--grep processor /proc/cpuinfo | wc -l--ver los nucleos del servidor
+--ulimit -n--checar--checar las worker_connections en nginx
+--vreynosa    ALL=(ALL)    NOPASSWD:ALL--agregar en el file sudoers para que no te pida pass el usuario
+--tcpdump -i eth0 src host 159.69.23.12 -vv -- comando para la comprobacion de paquetes de una ip especifica para analizar la conectividad
+--screen -S nombreldelscreen---comando para ponerle nombre a un screen
+--php-fpm7.2 -t --verificar sintaxis de php
+-- view nombredelarchivo = es solo para visualizar el contenido de un archivos
+--sysctl fs.inotify.max_user_watches=200000 --cambiar el numero de watches en lsyncd
+--java -jar MicroBoot-8080.war --para inicar una aplicacion en java
+--http://vreynosa:binbit123@gitlab.binbit.com/mcp/detection.git --ejemplo para harcodear el repo y no te pida pass ni usuario
+por protocolo
+--git clone --mirror 'http://vreynosa:binbit123@gitlab.binbit.com/mcp/detection.git' '/home/gitlab-runner/.composer/cache/vcs/git-gitlab.binbit.com-mcp-detection.git/'
+--mexicanada
+--usermod -a -G platform www-data---permisos para usuarios 
+--tcptrack -i eth0 port 8885--comando para ver en tiempo real el trafico que tiene un puerto 
+--https://www.howtoforge.com/tracking_tcp_connectios_with_tcptrack--instalacion
+--lnav storage/logs/log_py_personal.log--ver los logs de lumen en tiempo real
+--https://web.archive.org/--ver como se veian sitios en un lapso en el tiempo
+--ip addr add 195.201.248.165 dev eth0-comando para agregar la ip flotante al server
+--ansible-playbook nombredelplaybook.yaml --syntax-check--sirve para verificar la sintaxis del playbook
+--logrotate /etc/logrotate.conf --debug | grep -i appserver--hacer una prueba para ver si funciona el log rotate
+--logrotate -f -s /var/lib/logrotate/status /etc/logrotate.conf --forzar los logrotate
+--logrotate /etc/logrotate.d/appserver-- este tomando es para que tome las nuevas configuradas en el logrotate conf
+--cat /var/lib/logrotate/status | grep app --verificar el estado de los logrotate's
+--dig @8.8.8.8 amob.com NS --para saber en donde esta registrado ese dominio
+--dig @8.8.8.8 rm.cr.amob.com --saber la informacion de los records de un dominio
+--lsof -i:8080--para saber el PID de un proceso que corre en un puerto especifico
+--openvpn --config --conectarte a la vpn
+--ssh-keygen -f "/root/.ssh/known_hosts" -R "159.69.218.244" --retirar una ip
+--tar -tvf etc-gitlab-1541628188.tar -- ver archivos .tar
+--supervisorctl restart all -- restart a todos los supervisors
+--supervisorctl restart mcp-flask --un supervisor en especifico
+--fsck -y --realizar una checksum del disco
+--fsck -y /dev/sda---para la particion 
+--fsck -fy /dev/sda1--verificar la particion
+--less +G app.log---para posicionarte al final del log de la aplicacion de java
+--: #,#s/patern/replacement/gc--reemplazar cierto numero de lineas y algo especifico
+Ejemplo
+: 23-29s/hola/holas/gc--de la linea 23 a la 29, remplaza todo el hola por . holas
+--composer clearcache--limpia el cache del composer
+--https://askubuntu.com/questions/73864/how-to-modify-an-invalid-etc-sudoers-file--modificar la linea del sudoers, pinche mugrero
+--crontab -l -u dba-- ver los crons de un usuarios
+--ln -sf currency-exchanges-1.0.5.jar currency-exchanges.jar--crear un soflink para un jar
+--tail -f haproxy.log | awk ' {print $1,$2,$3,$6} '--para imprimir en terminal la fecha, la hora y la ip
+--tail -f haproxy.log | awk ' {print $1,$2,$3,$6,$9} ' > /home/vreynosa/log_bbcarrierws.com & --lo dejas en segunda instancia
+--cat log_bbcarrierws.com | awk '{print $4}' | uniq -c --enlistar todo el contenido repetido de un log
+--cat log_bbcarrierws.com | awk '{print $4}' | grep -v "52.87.121.38" | uniq -c --ignorar una ip que te muestre y te enumere el log
+--cat log_bbcarrierws.com | awk '{print $4}' | grep -v "52.87.121.38" | cut -d ':' -f 1 | uniq -c --este log te manda la ip, ignorando la ip 52.87.121.38, delimitando todo lo que este despues de : y que sea solo uno
+--cat log_bbcarrierws.com | awk '{print $4}' | grep -v "52.87.121.38" | grep -v "127.0.0.1"| cut -d ':' -f 1 | uniq -c --aqui se filtra el localhost
+
+//COMANDOS RUBY
+rbenv install --list---ver las versiones de ruby con rbenv
+gem list-------------ver las gemas que estan instaladas
+rbenv install 2.1.0-rc1--instalar una version de ruby con rbenv
+rvm --default use ruby_version--para poner la version de ruby por default
+gem uninstall bundler
+gem install bundler
+
+
+instalar ruby con rvm 
+install
+https://www.digitalocean.com/community/tutorials/how-to-install-ruby-on-rails-with-rvm-on-ubuntu-16-04
+https://www.ruby-lang.org/es/documentation/installation/--ruby nativo
+https://www.digitalocean.com/community/tutorials/how-to-use-rvm-to-manage-ruby-installations-and-environments-on-a-vps
+
+Pasos a seguir para instalar rvm
+apt-get install curl
+curl -L https://get.rvm.io | bash -s stable
+source /etc/profile.d/rvm.sh
+vim /root/.bashrc 
+source /etc/profile.d/rvm.sh--add this line on the bashrc file 
+rvm requirements
+
+
+rvm list known----ver las versiones
+rvm install ruby_version---instalar la version de ruby 
+rvm list----saber que versiones estan instaladas
+rvm use ruby_version------seleccionar la version que usaras
+$ rvm install 2.3.3
+$ rvm use 2.3.3 --default
+$ rvm rubygems current
+
+
+Gooogle cloud commands
+-Comando para conectarte desde el shell de google 
+ssh content-delivery-ftp.us-central1-f.applied-tractor-106814
+ssh kitmaker-apis1.us-central1-f.applied-tractor-106814
+ssh web-sites.us-central1-f.applied-tractor-106814
+
+-Para configurar el config ssh de una vm instances
+sudo gcloud compute config-ssh
+
+Montar un disco en linux
+-mkdir -p /mnt/backup ; fdsik -l
+-mount -t ntfs -ro nls=utf8,mas=0222 /dev/sda2 /mnt/backup
+-mount -t ntfs -ro nls=utf8,umask=0222 /dev/sda2 /mnt/backup
+
+
+Vaciar la particicoion /boot de un server
+-apt-get autoremove  
+-aptitude search ~ilinux-image
+-apt-get purge linux-image-4.15.0-32-generic
+
+
+
+Levantar el OPM monitoreo de postgres
+1- su nagios
+2- services nagios3 restart ( pide passwd de root )
+3- services opm restart ( pide passwd de root )
+4- voila
+
+POSTGRES COMMANDS
+su - postgres---tienes que ser usuario postgres
+psql---entras a la terminal de postgres desde la terminal
+\conninfo---dar informacion con que usuario estas conectado y a que base 
+\list---enlista las bases de datos dentro de postgres
+\connect lk_dialog--manera que te puedas conectar a una base de datos en postgres
+\dt---enlista las tablas de las bases de datos 
+
+
+PROXMOX CONFIGURATIONS
+etc/pve/lxc--- ruta donde estan las config de los containers
+pct unlock 162 --desbloquear un container
+pct start 162 --encender un container
+sysctl fs.inotify.max_user_instances=256
+
+INSTALACION DEL RABBIT
+apt-get install rabbitmq-server
+rabbitmqctl start_app
+rabbitmqctl add_user admin BinBitMx18
+rabbitmqctl set_user_tags admin administrator
+rabbitmqctl set_permissions -p /  admin ".*" ".*" ".*"
+rabbitmq-plugins enable rabbitmq_management
+
+RABBIT COMMANDS
+rabbitmqctl status---ver el estado,version y estatus del rabbitmq
+rabbitmqctl list_queues--checar las queues desde terminal
+rabbitmq-plugins list--ver los plugins que estan instalados en el rabbitmq
+rabbitmq-plugins enable rabbitmq_delayed_message_exchange--asi habilitas un plugin en rabbitmq, pero primero
+tienes que poner el binario del plugin en /usr/lib/rabbitmq/lib/rabbitmq_server-3.5.7/plugins para que la 
+instalacion funcione
+
+INSTALACION DE RABBITMQ 3.7
+wget https://packages.erlang-solutions.com/erlang-solutions_1.0_all.deb
+dpkg -i erlang-solutions_1.0_all.deb
+apt-get update
+apt-get install erlang erlang-nox
+
+echo "deb https://dl.bintray.com/rabbitmq/debian xenial main" | sudo tee /etc/apt/sources.list.d/bintray.rabbitmq.list
+wget -O- https://dl.bintray.com/rabbitmq/Keys/rabbitmq-release-signing-key.asc | sudo apt-key add -
+apt-get update
+apt-get install rabbitmq-server
+rabbitmqctl start_app
+rabbitmqctl add_user admin BinBitMx18
+rabbitmqctl set_user_tags admin administrator
+rabbitmqctl set_permissions -p /  admin ".*" ".*" ".*"
+rabbitmq-plugins enable rabbitmq_management
+
+//Activacion de plugins//
+http://www.rabbitmq.com/community-plugins.html
+rabbitmq-plugins enable rabbitmq_delayed_message_exchange
+
+
+RABBIT MARKETINGHUB
+http://195.201.223.85:15672/#/
+
+admin / BinMox18
+
+/files installation
+root@Rabbit-billing /etc/rabbitmq # ls
+enabled_plugins  rabbitmq-env.conf
+
+NODEWORKERS INSTALATION
+crea un container instala ngixn node y pm2
+descarga el repo de core/node-workers pasa el folder del node-workers
+a var www
+copia el vhost de node workers
+su platform
+pm2 start ecosystem.staging.yaml
+
+
+https://www.digitalocean.com/community/tutorials/how-to-install-node-js-on-ubuntu-16-04
+apt install npm 
+npm install -g pm2
+apt-get install aptitud
+aptitude install npm
+
+
+//COMANDOS GIT
+Git global setup
+git config --global user.name "Valentin Reynosa"
+git config --global user.email "valentinreynosa@gmail.com"
+
+-git remote -v = es para ver si estas conectado con el repo
+binbit-HP-Notebook operations # git remote -v
+origin  https://gitlab.com/Valentin_Reynosa17/operations.git (fetch)
+origin  https://gitlab.com/Valentin_Reynosa17/operations.git (push)
+
+-git checkout -b dev = este comando es para crear una branch en el repo
+-git checkout dev = para cambiar de branch
+-git branch = te dice en que branch estas, ya sea dev o master
+binbit-HP-Notebook operations # git branch 
+* dev
+  master
+-git add -A . = es para agregar todos los archivos que se quieren mandar al repo
+-git status = te dice todos los archivos nuevos y modificados para el repo
+-git commit -m "add scripts" = este comando es para agregar todo el contenido al repo
+-git push -u origin dev = con este comando se sube el nuevo contenido y se elige la branch
+
+-git remote add origin https://gitlab.com/Valentin_Reynosa17/operations.git
+
+//crear un tag desde linea de comnandos git 
+git tag 0.0.61
+
+git push origin 0.0.61
+
+
+//errores
+rm -f ./.git/index.lock
+
+
+//PHP COMMANDS
+--composer create-project --prefer-dist laravel/lumen dz_ooredoo--crear un proyecto en laravel
+--pecl search mongo--ver versiones de algunas extennsiones de php
+--pecl install mongodb--instalacion de la version mas reciente de ese driver
+--php --ri mongodb--ver toda la informacion de las entensiones de php
+--apt install php7.x-dev-para que tome los comandos de pecl install
+--apt-get install pkg-config--lo mismo
+
+--Como montar un storage box en un server HETZNER
+mount.cifs -o user=<username>,pass=<password> //<username>.your-storagebox.de/backup /PATH/FOLDER
+
+Ejemplo
+mount.cifs -o user=u161336,pass=9zm1G58GvjR6yJ3G //u161336.your-storagebox.de/backup /mnt/u161336/
+
+--Como montar un volumen en un server de cloud HETZNER
+sudo mkfs.ext4 -F /dev/disk/by-id/scsi-0HC_Volume_1224211
+mkdir /mnt/volume-hel1-test
+mount -o discard,defaults /dev/disk/by-id/scsi-0HC_Volume_1224211 /mnt/volume-hel1-test
+
+--Cloudfiles Rackspace
+//pasar un object a un servidor 
+swiftly get --all-objects z_DO_NOT_DELETE_CloudBackup_v2_0_6ce8601d-78f6-4d33-8633-4cfedd0b5131 -o /mnt/u161336/cloudfiles/z_DO_NOT_DELETE_CloudBackup_v2_0_6ce8601d-78f6-4d33-8633-4cfedd0b5131/
+
+//borrar un object 
+swiftly --verbose delete z_DO_NOT_DELETE_CloudBackup_v2_0_6833f89f-4890-42c6-9bdc-f27a35f1b34c --recursive --until-empty
+
+
+//PRUEBAS DE PERFORMANCE DISK 
+-hdparm -Tt /dev/sdb
+
+
+
+
+PROCEDIENTO PARA REINICAR LOS KANNELS
+Paso1-/etc/init.d/kannel1 stop
+Paso2-miro que la instancia este totalmente parada: ps aux | grep kannel1
+Paso3-y luego que no hay procesos corro: /etc/init.d/kannel1 start
+
+//PM2 commands
+pm2 list
+pm2 logs <app_name>
+pm2 monit
+pm2 deploy
+pm2 start app.js
+
+Start and Daemonize any application:
+                $ pm2 start app.js
+
+                Load Balance 4 instances of api.js:
+                $ pm2 start api.js -i 4
+
+                Monitor in production:
+                $ pm2 monitor
+
+                Make pm2 auto-boot at server restart:
+                $ pm2 startup
+
+                To go further checkout:
+                http://pm2.io/
+
+
+comandos para laravel 
+---instalar dependencias---
+composer install (dentro del document root)
+---limpiar el cache de la aplicacion---- 
+php artisan cache:clear
+Patupdate----actualizarh de la base de datos----
+/home/devsafecam/public_html/config/database.php
+---Path para ver los errores de laravel----
+/home/devsafecam/public_html/storage/logs/laravel.log
+
+--migrar data--
+php artisan migrate
+
+
+composer update----actualizar el proceso de instalacion del composer 
+
+
+
+
+//mongodb commands
+-importar una base de datos en mongo
+mongoimport --db testdata --collection restaurants --file primer-dataset.json
+-exportar una base de datos en mongodb
+mongoexport --db testdata -c restaurant --out newdbexport.json
+
+n the above command, we use --db to specify the database, -c for the collection and --out for the file in which the data will be saved.
+
+
+//Redis COMMANDS
+redis-cli -h 127.0.0.1 -p 6379 -a TweF42Aed56 --entrar al cli de Redis
+redis-cli -h 127.0.0.1 -p 6379 -a fbb0af8c46abc6fd59f90b6f168954977003229c7e9627362625cedc05ea375b --stat
+redis-cli -h 127.0.0.1 -p 6379 -a TweF42Aed56 --latency
+redis-cli -h 127.0.0.1 -p 6379 -a TweF42Aed56 --bigkeys
+redis-cli monitor
+redis-cli --stat
+redis-cli --latency
+redis-cli --latency-history
+
+
+//CAMBIAR EL RESOLV PERMANENTEMENTE
+PATH
+-root@mpcotigo-kvm:/etc/resolvconf/resolv.conf.d# ls
+base  head
+-root@mpcotigo-kvm:/etc/resolvconf/resolv.conf.d# cat base
+search binbit.com
+nameserver 192.168.13.33
+-resolv -u
+
+//lumen/laravel
+php artisan import:mktonline_data --d=2018-06-01 --dt=2018-07-02 --metodo para importar datos
+
+
+--sync; echo "1" > /proc/sys/vm/drop_caches && echo "2" > /proc/sys/vm/drop_caches && echo "3" > /proc/sys/vm/drop_caches--limpiar cache de varnish
+
+--sudo awk '{print $1}' /var/log/nginx/access.log | sort | uniq -c | sort -nr--nos muestra los hits de las ip en el log de varnish
+
+--tail -100 /var/log/varnish/access.log | awk '{print $1}' | sort | uniq -c | sort -n | tail--Hace los mismo, le puedes cambiar el path en donde tomara los hists de las ip's
+
+--du -sh *--mostrar peso de files
+
+--drush cache-clear --limpias el cache de drupal desde el servidor
+
+--drush cc all -- limpiar el cache en el DR, en drupal
+
+--fail2ban-regex /var/log/apache2/access.log /etc/fail2ban/filter.d/http-get-dos.conf --comando para verificar que se este usando el filter de la jail implementada
+
+--https://www.garron.me/es/articulos/scp.html--comandos scp
+
+--https://medium.com/@mrkdsgn/steps-to-install-a-go-daddy-ssl-certificate-on-nginx-on-ubuntu-14-04-ff942b9fd7ff--como renovar o crear un cerficado ssl con nginx
+
+--https://www.tecmint.com/install-lets-encrypt-ssl-certificate-to-secure-apache-on-rhel-centos/---instalacion de let's encrypted
+https://www.digitalocean.com/community/tutorials/how-to-secure-nginx-with-let-s-encrypt-on-ubuntu-16-04
+
+mount --bind /var/www/thrend-images /var/www/vhosts/affluentattache.com/httpdocs/modules/mod_trends/images
+
+--http://www.linuxbrigade.com/block-countries-from-your-server-easily-with-csf/--bloquear ip's y regiones con csf
+
+--https://dev.mysql.com/doc/refman/5.5/en/optimize-table.html--como optimizar tablas desde terminal en mysql
+
+--https://www.digitalocean.com/community/tutorials/how-to-install-and-secure-phpmyadmin-with-nginx-on-an-ubuntu-14-04-server--instalar phpmyadmin con nginx, mover phpmyadmin al DR
+
+
+//SQL COMMANDS
+--SELECT table_schema "database", sum(data_length + index_length)/1024/1024/1024 "size in GB" FROM information_schema.TABLES GROUP BY table_schema;--peso de bases de datos en GB
+--select count(*) from nombredelatabla;-------saber el contenido de una tabla
+--select user,host from mysql.user;------to get a list of the user and they permissions
+
+//DAR PERMISOS Y PRIVILEGIOS A USUARIOS DENTRO DEL CLI DE mysql
+
+--GRANT ALL PRIVILEGES ON NOMBREDELABASE.NOMBREDELATABLA TO NOMBREDELUSUARIO@'%';
+--GRANT SELECT,UPDATE,DELETE,INSERT ON base.tabla TO usuariobinbit@'%';
+--GRANT ALL PRIVILEGES ON *.* TO root@'%' IDENTIFIED BY 'password';
+FLUSH PRIVILEGES;
+claro, bueno primero (la best practice) es:
+Ejemplos:
+grant alter on passport.* to jcabrera@'%';
+grant select on propellerads.* to propellerads_user@'%';
+grant insert on propellerads.* to propellerads_user@'%';
+grant create view on adsterra.* to jcabrera@'%'; -- crear vistas
+grant super on *.* to jcabrera@'%'; --darle permisos SUPER a un usuario a todas las bases de datos y sus date
+
+1.- Que te digan el nombre de la base
+2.- Que te digan la tabla
+3.- Que te digan que quieren hacer (Lectura --> SELECT,Escribir --> INSERT, Modificar --> Update,borrar --> DELETE, alter)
+
+//EJEMPLO
+mysql> create database passport;
+Query OK, 1 row affected (0.01 sec)
+
+mysql> create user passport_user@'%' identified by '"1Ao234qVb"';
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> grant all privileges on passport.* to passport_user@'%';
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> flush privileges;
+Query OK, 0 rows affected (0.00 sec)
+
+--------------------------------------------------------------------------
+ysql> create database wpcare;
+Query OK, 1 row affected (0.00 sec)
+
+mysql> create user wpcare@'localhost' identified by 'Dt7AHL5V';
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> grant all privileges on wpcare.* to wpcare@'localhost';
+Query OK, 0 rows affected (0.00 sec)
+
+----------------------------------------------------------------------------
+
+mysql> create database wpcorporatenew;
+Query OK, 1 row affected (0.00 sec)
+
+mysql> create user wpcorporatenew@'localhost' identified by 'ZHv9j50E';
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> grant all privileges on wpcorporatenew.* to wpcorporatenew@'localhost';
+Query OK, 0 rows affected (0.01 sec)
+
+
+
+
+//CAMBIAR CONTRASEÑA DE UN USAURIO
+MariaDB
+alter user 'passport_user'@'%' identified by '1Ao234qVb';
+ALTER USER 'root'@'187.178.207.223' IDENTIFIED BY 'klUq0/18f5nu6ugxqFQ';
+
+Mysql
+SET PASSWORD FOR 'root'@'187.178.207.223' = PASSWORD('klUq0/18f5nu6ugxqFQ');
+SET PASSWORD FOR 'root'@'localhost' = PASSWORD('klUq0/18f5nu6ugxqFQ');
+
+
+Por ejemplo, ayer Cabrera queria en la base "capabilities" permisos por ejemplo a una tabla 'carriers' con su usuario
+entonces yo le di
+GRANT ALL PRIVILEGES ON capabilities.carriers TO jcabrera@'%';
+
+//RESET PASSWORD CHANGES MYSQL CLI
+# Stop MySQL
+sudo service mysql stop
+# Make MySQL service directory.
+sudo mkdir /var/run/mysqld
+# Give MySQL user permission to write to the service directory.
+sudo chown mysql: /var/run/mysqld
+# Start MySQL manually, without permission checks or networking.
+sudo mysqld_safe --skip-grant-tables --skip-networking &
+# Log in without a password.
+mysql -uroot mysql
+UPDATE mysql.user SET authentication_string=PASSWORD('BinBitMx18'), plugin='mysql_native_password' WHERE User='root' AND Host='%';
+
+//COMANDO PARA SABER CUANTO PESA UNA BASE DE DATOS--
+SELECT table_schema "Data Base Name", sum( data_length + index_length ) / 1024 / 1024 "Data Base Size in MB" FROM information_schema.TABLES GROUP BY table_schema ;
+
+//SABER EL PESO DE TODAS LAS TABLAS DE UNA BASE DE DATOS(MEGAS)
+SELECT table_name Tabla,(data_length+index_length)/(1024*1024) Tamaño FROM information_schema.tables WHERE table_schema='vanguardia';
+
+SELECT table_schema "vanguardia", sum( data_length + index_length ) / 1024 / 1024 "Data Base Size in MB" FROM information_schema.TABLES GROUP BY table_schema ;
+
+//COMANDO PARA SABER EL USUARIO DE MYSQL//
+select User from mysql.user;
+
+//DARLE PERMISOS AL USUARIO ROOT DE CONECTARSE DE MANERA REMOTA CON UN SOLO SERVER
+grant all privileges on *.* to 'root'@'95.216.157.134' identified by 'binbit123';
+grant select on passport.* to passport@'189.208.128.209' identified by 'xqLgmYES597Qjg2k';
+grant insert on passport.* to passport@'189.208.128.209' identified by 'xqLgmYES597Qjg2k';
+
+//DARLE PERMISOS DE SOLO LECTURA CON USUARIO A UNA BASE DE DATOS
+grant select on base.* to 'passport_user'@'%';
+
+//VER LOS PRIVILEGIOS 
+show grants for passport_user;
+
+//DESINSTALAR EL PLUGIN DE VALIDACION DE PASSWORDS
+uninstall plugin validate_password;
+
+//USAR ESTE COMANDO CUANDO AL MOMENTO DE HACER UN DUMP REMOTO TE SALGA "LOCK TABLES"
+mysqldump --single-transaction -h 195.201.223.85 -u base -p base > /home/vreynosa/base.sql
+
+
+
+COMENTAR
+:x,y s/^/## /
+
+x numero de linea inicial
+y numero de linea final
+^inicio de linea
+## comentario
+
+DESCOMENTAR
+:x,y s/##/ /
+
+//VER LOGS MAS ESPECIFCOS////
+LOGS POR HORA
+sed -n '/15\/Jun\/2017:17:59/,/15\/Jun\/2017:18:0/ p' vanguardia.com.mx.access.log >> test.log
+
+IP LOGS
+tail -100 test.log | awk '{print $1}' | sort | uniq -c | sort -n | tail
+
+AGENTES LOGS
+awk -F'"' '/GET/ {print $6}' htest.log | cut -d' ' -f1 | sort | uniq -c | sort -rn
+
+URL LOGS
+tail -100 test.log | awk '{print $8}’ | sort | uniq -c | sort -n | tail
+
+CONEXIONES EN ESE MOMENTO
+netstat -plan|anahispotify17 :80|awk {'print $5'}|cut -d: -f 1|sort|uniq -c|sort -nk 1
+
+CUANTOS HITS HACE UNA IP EN UNA HORA A UNA PARTE DEL DR
+grep "25/Jul/2017:20" /var/log/apache2/access.log | grep "/wp-content/uploads/2015/12/dflt-avt.jpg" | grep 12.130.166.96 | wc -l
+
+VER LOS HITS DE UNA IP EN UN DIA, FECHA PREDETERMINADA
+grep "25/Jul/2017" /var/log/apache2/access.log | grep  "/wp-content/uploads/2015/12/dflt-avt.jpg" | grep 12.130.166.96 |  wc -l
+
+
+PARA VERIFICAR LOGS ADECUADAMENTE
+
+http://www.inmotionhosting.com/support/website/server-usage/view-level-of-traffic-with-apache-access-log
+//CAMBIAR PERMISOS DE STICKYBIT--
+root@clickittech:/var/www# chmod g+s dev.clickit/
+
+//CAMBIAR PERMISOS DE DIRECTORIOS Y ARCHIVOS//
+find . -type f -exec chmod 644 {} \;
+find . -type d -exec chmod 755 {} \;
+
+find . -type f -exec chmod 664 {} \;  && find . -type d -exec chmod 775 {} \;
+
+
+
+//HERRAMIENTA PARA EXTRAER UNA BASE DE DWTOS DE WORDPRESS//
+root@ip-172-31-19-205:/var/www/html# chmod +x wp-cli.phar
+./wp-cli.phar db export --allow-root
+
+
+
+//DUMP A UNA BASE DE DATOS//
+mysqldump -u root -p "database" > "/path de la base de datos/"
+mysqlcheck -u root -p -r  heraldo= repara una base de datos, hacerlo fuera de la terminal
+
+//BUSCAR UN ARCHIVO ESPECIFICO EN EL SERVER//
+grep -rl "algo" .
+
+
+
+//COMANDO PARA REALIZAR PRUEBAS CON APACHEBENCHMARK//
+ab -n 1500 -c 150 -k "http://www.pjcenter.com/"-nombre del sitio
+ab-inicia el apachebench
+-n request del sitio
+-c concurrencia
+
+ab -n 50 -c 15 -k http://www.bgplc.co.uk/
+
+ab -n 250 -c 60 -k http://www.windsorartesia.com/
+
+ab -n 250 -c 60 -k http://52.86.161.79/
+
+
+
+
+--http://www.w3schools.com/php/func_mail_mail.asp--Script de php para mandar un correo desde el server
+
+---------------------------------------------------------------------------
+<?php
+
+       $name = "Alfonso";
+
+        $to="web-WMmDb8@mail-tester.com";
+        $subject="Invoice";
+        $from = 'Info  <info@performancepainhouston.com>';
+        $body='Hi '.$name.', <br/><br>Now You can See Yor main in inbox';
+        $headers = "From: " .($from) . "\r\n";
+        $headers .= "Reply-To: ".($from) . "\r\n";
+        $headers .= "Return-Path: ".($from) . "\r\n";;
+        $headers .= "MIME-Version: 1.0\r\n";
+        $headers .= "Content-Type: text/html; charset=ISO-8859-1\r\n";
+//        $headers .= "X-Priority: 3\r\n";
+        $headers .= "X-Mailer: PHP". phpversion() ."\r\n";
+        //mail($to,$subject,$body,$headers);
+
+    if (mail($to,$subject,$body,$headers)) {
+        echo "Mail Sent. Content-Type: text/html";
+    } else {
+        echo "FAILED TO SENT";
+    }
+
+?>
+----------------------------------------------------------------------------------
+Script para verificar correos, se corre con php
+
+COMANDOS GIT
+git clone -b staging-test --single-branch https://github.com/mauricoder/YoReparo-sf2.git
+
+------------------------------------------------------------------------------------------
+VEr en tiempo real que ip's esatn dentro de tu servidor
+
+watch -n1 "netstat -anpt|grep nginx|grep ESTABLISHED|cut -b45-60|cut -d':' -f1|uniq -c "
+
+//Comandos para migrar contenido con rsync
+-rsync -azvh --progress /sourcedirectory/domain.com/ root@NEWSERVERIP:/var/www/domain.com/htdocs
+-rsync -azvh --progress /var/www/owncloud/ root@188.40.127.52:/var/www
+-rsync -azvh --progress /home/vreynosa/instantclient-basic-linux.x64-11.2.0.4.0.zip vreynosa@185.36.144.2:/opt/
+rsync -azvh --progress /home/vreynosa/instantclient-basic-linux.x64-11.2.0.4.0.zip vreynosa@185.36.144.2:/opt/
+
+Ejemplo
+//cuando mandas a otro server
+rsync -azvh --progress /home/alan/stats_test.sql root@192.168.12.43:/home/
+//
+rsync -azvh --progress /var/log/pacw_logs root@192.168.12.43:/var/log/
+
+rsync -azvh --progress /var/ftp/ root@88.99.193.59:/var/ftp/
+
+rsync -azvh --progress /platform/ root@192.168.12.43:/platform/
+
+rsync -azvh --progress /home/vreynosa/Downloads/binbitcloudfiles root@94.130.220.156:/mnt/
+
+/Ejemplo de cuando quieres traer un archivo de un server externo a tu local
+rsync -azvh root@159.69.156.231:/home/vreynosa/id_indosat /home/vreynosaf
+
+
+
+
+
+INSTALAR ACME PARA CERTIFICADOS
+bash
+git clone https://github.com/Neilpang/acme.sh.git
+cd ./acme.sh
+./acme.sh --install
+
+Single Domain
+bash
+acme.sh --issue -d example.com -w /home/wwwroot/example.com
+acme.sh --issue -d americanhomecares.org -d www.americanhomecares.org -w /var/www/American-site/american
+acme.sh --issue -d snfmgt.com -d www.snfmgt.com -w /var/www/html
+
+
+[Tue Sep  5 17:55:47 UTC 2017] Your cert is in  /root/.acme.sh/americanhomecares.org/americanhomecares.org.cer
+[Tue Sep  5 17:55:47 UTC 2017] Your cert key is in  /root/.acme.sh/americanhomecares.org/americanhomecares.org.key
+[Tue Sep  5 17:55:47 UTC 2017] The intermediate CA cert is in  /root/.acme.sh/americanhomecares.org/ca.cer
+[Tue Sep  5 17:55:47 UTC 2017] And the full chain certs is there:  /root/.acme.sh/americanhomecares.org/fullchain.cer
+
+./acme.sh --issue -d 1sourceapartments.com -d www.1sourceapartments.com -w /var/www/html/1sourceapartments.com
+[Fri Sep 15 17:21:01 CDT 2017] Your cert is in  /root/.acme.sh/1sourceapartments.com/1sourceapartments.com.cer
+[Fri Sep 15 17:21:01 CDT 2017] Your cert key is in  /root/.acme.sh/1sourceapartments.com/1sourceapartments.com.key
+[Fri Sep 15 17:21:01 CDT 2017] The intermediate CA cert is in  /root/.acme.sh/1sourceapartments.com/ca.cer
+[Fri Sep 15 17:21:01 CDT 2017] And the full chain certs is there:  /root/.acme.sh/1sourceapartments.com/fullchain.cer
+
+Example
+acme.sh --issue -d windsorcares.com  -w /var/www/windsorcares
+acme.sh --issue -d windsorvallejo.com -w /var/www/windsorvallejo
+acme.sh --issue -d windsornorthlongbeach.com -w /var/www/windsornorthlongbeach
+
+./letsencrypt-auto --nginx -d www.heraldodemexico.com.mx -d heraldodemexico.com.mx
+
+certbot --nginx -d heraldodemexico.com.mx -d www.heraldodemexico.com.mx
+
+
+
+
+//Pasar datos con gcloud//
+gcloud compute copy-files --zone us-east1-b /root/backup/2017-03-01_00-01-29 db02-replica:/home/ubuntu
+
+acme.sh --issue -d windsornorthlongbeach.com -w /var/www/windsornorthlongbeach
+
+--SELECT CONCAT( 'TRUNCATE TABLE ', GROUP_CONCAT(table_name) , ';' )
+AS statement FROM information_schema.tables
+WHERE table_schema = ‘BDNAME’ AND table_name LIKE 'cache_%';----limpiar la tabla truncate y el cache de la base de datos
+
+--rebildear los los permisos de acceso--
+https://docs.acquia.com/article/rebuilding-node-access-permissions
+drush php-eval 'node_access_rebuild($batch_mode = TRUE) '
+
+
+//comandos para usar el search and replace desde CLI//
+php srdb.cli.php -h localhost -n windsor -u windsoruser -p 5abPeS -s https -r http

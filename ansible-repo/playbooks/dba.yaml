@@ -1,0 +1,22 @@
+---
+###
+# Se agregan los keys de los developers
+###
+- hosts: microplat
+  become: yes
+  tasks:
+    - name: Ensure dba group exists
+      group: name=dba state=present
+
+    - name: Ensure dba users can sudo without password
+      lineinfile: "dest=/etc/sudoers state=present regexp='^%dba' line='%dba ALL=(ALL) NOPASSWD: ALL'"   
+
+    - name:  Adding user
+      user:  name=rtorres state=present comment="rtorres@binbit.net" groups=dba append=yes shell=/bin/bash
+    - name: Adding authorized_keys
+      authorized_key: user=rtorres key="ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCopanW8AISsk53nptkx9aWsOIXB9yrxaTqWx9Kv83gu/wblih7mdeZUWQn4BA6SYb7yATNtLsXJ1yEQw+bvns000jgAOCcx7/J/X89WRLS5Qtn8yEX+CiNMDV9NGgFgFjURVrrwp090BopohGK5iussgIpdgIufGePRzSZEZgXM1WL1IYTpEAbK1C+XCbJoRgiYgQ9fkzFW/Kweq1U4mGnoC4PQ9m8I/pJmKKq5CAghQabTzYVyqYv7ewcOjbxXt28z+1Bc3CfVdEw7AiSNwgyGq4WKK/AmUoo/XCxeHempXrmKT7VYfg/+2YaNeK08AkZkBm5YJFRJMx24ACa2D/h rtorres@rtorres-HP-Notebook" exclusive=true
+      
+    - name:  Adding user
+      user:  name=dgonzalez state=present comment="dgonzalez@binbit.net" groups=dba append=yes shell=/bin/bash
+    - name: Adding authorized_keys
+      authorized_key: user=dgonzalez key="ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDjRuWRW2m3Tlx+Tk66yyQjfFRWD31laGPj2Y1d/csghkiYTRycttjZyI9+jjbvNyJzbPCu7CVTmlw3CB1jpg28LkKxL4MhQ1OtN9fP5YA6dw9LZRKxFXRm7wlIlTLyD/fpJAIRzWwC/LqGz+KbZeqznOP9C5Xph2QSNnR70bFVINIo+yZbyb9aGPrg6x9wciQzMoLL9bv9lOJZvhbvoJLCRifT/ezUzLzhLH2GE2djdO7QUpAMdetm1RgHxwXJEsWjDAhjYQ3CUXArk4MTnfJq+qpDIzXcPLZ46doM0T1JIDYu5+tJAWnHiEg/VFX4gMSsQnQmOTB5jsd6yN7Z1lbL dgonzalez" exclusive=true

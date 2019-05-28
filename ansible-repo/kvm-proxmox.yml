@@ -1,0 +1,21 @@
+---
+- hosts: nodo
+  tasks:
+  
+    ###
+    # Create KVM 
+    ### 
+    - proxmox_kvm:
+        node        : 'px01'
+        api_host    : 'px01'
+        api_user    : 'alan@ldap'
+        api_password: '12050823'    
+        name        : 'test-alan'
+        net         : '{"net0":"name=eth0,bridge=vmbr2"}'
+        cores       : '6'
+        sockets     : '2'
+        storage     : 'cephvm11'
+        format      : 'qcow2'
+        clone       : 'ansible-origins'        
+        template    : yes
+        timeout     : 2000

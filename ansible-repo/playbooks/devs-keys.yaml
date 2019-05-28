@@ -1,0 +1,84 @@
+---
+###
+# Se agregan los keys de los developers
+###
+- hosts: microplat
+  become: yes
+  tasks:
+    - name: Ensure developer group exists
+      group: name=developer state=present
+
+    - name: Ensure developer users can sudo without password
+      lineinfile: "dest=/etc/sudoers state=present regexp='^%developer' line='%developer ALL=(ALL) NOPASSWD: ALL'"   
+
+    - name:  Adding user
+      user:  name=aavila state=present comment="aavila@binbit.net" groups=developer append=yes shell=/bin/bash
+    - name: Adding authorized_keys
+      authorized_key: user=aavila key="ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCVxGHmLQFgz7jpORu+jmyo+jcyvJdxdcXPv+oMqNm5FyYGP+H8MQV7XNMP/FMAh66Mop86WKt2pp/G40G6fE5Fp+sKk4oucp78aA4X0A5g1Ronwxhp1aj8tHc2QA5AeqwrntjCvCUN/9h2p8tvR6JkY5Tz0lAg/uF31D/dtpwhdedgFSEbL+n9ZywPfnZinrtgnk3WWActsN+e6WjrCdSv7vVjlHYufk37nM1lgvQC0Lq9eR1UpJfLtJ5n6X5jvZoQ3YuxDOAzsRZpqGJaBz4H2qJHyrkO2WfoYg9o1aiBIYob2VG6VoLTki+k2eqNZo38w0IbosJLyxh1gmIBpU2V aavila" exclusive=true
+      
+    - name:  Adding user
+      user:  name=favalos state=present comment="favalos@binbit.net" groups=developer append=yes shell=/bin/bash
+    - name: Adding authorized_keys
+      authorized_key: user=favalos key="ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQCbXbxrtCNDPgrX2TGMB+pOXz/u4oGgg72rPMAe51kmKoiQDgl4Fc7SiA+Aa4lpBAwnYSerdWAWqEK+2PkwNhc8dnL5fecgQnhSGEkGWy7/2d1GK8hYZWa+7rsxETjcMnF/pwIL2y8ToYHPt9rliMUllsm1mXLYVfM86XQPMuVOA/eNRCPtB3vtSsNBrshkOzIAA1aOEnCLTiCsnqsIbdBi16jMrQvfFP7Lb2j4Y+rUDQlexBzLR1TsapemmLvto6TGEkiVxcGdLwmz71rJcT+mbARXx7gnYzPCrvUfd07NF/2fiEMTdrR5krarYgEMWHJqf/WUL2KiiVhO200BjuqW2kj7Mf2isRye8NQTHLiQ4BPAvLyJQEEpwfw6pjUXxUUcgG+fmGvjUt63Ml1cqCYpXRr09Ar0KoDfSwI91RHYr8jVqqO99iLIj3/ZavoHBTtztMjiadi09U1YWDiKMb7z5+/sn46gKfO5iN4q5xWBu2YMG7yrhFvJAaFBuAwSbaVTQPLIAsJkUZ6os5lfpYnF8vp/Q3qfeQjzHMta8UrdFPiu4kv4wm+Wt2vQd2M9qGuTUtBwMBHz4AKOqr95imcP0SgfMErw3dlwFjDFwE2cVqSKKXaLT1IZ+yj9wXZCAT1DL2l/5xYfu8HuosDneLeBA0FmmqfCzNa7L5Td0uwrAQ== favalos" exclusive=true
+
+    - name:  Adding user
+      user:  name=jjaimes state=present comment="jjaimes@binbit.net" groups=developer append=yes shell=/bin/bash
+    - name: Adding authorized_keys
+      authorized_key: user=jjaimes key="ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQC+AoQ/TZpjhpKRtxTwF2kWjvckNexxLNZa4fIRNpq384fB01tw4cFXnWXiyKs6uiBxBveap0mhSX8YNnqMqVOOTyydx8CgS17fk4ckihbq5zEzE0BhT0hTmK5wFZR0S8mJmcoDVD1oeelP0lXAH5AYu4vhgu2LQ4es9azyzvC3lchmni39Yb6pnLVrEkY1QkrcBkub+oSdhrt1XKyeWsBrvt5t3pU8+uQxLcNDeXDAcqA4ObXYtBIOQ4TY6wZGYrZ5DtV42+9K6ue/cU1+CHhIct3sFXku9RAWR9gylWRvUsHVIccaqWY/VtJXCaM04p96B3jypkt8JdSkq3iEV6I8x9ZSSn35fh47jC0fN4FhyHaMV0oupkvWi8rflUxuQPr5aUgNKQOTwYi8uVU7Ggh8dVkoWdQX8MF1c9dc4dc5rhdlEMmYj01lVyAD7j9utfA5ebbiwrEUtXEGUy54hgmUiWxVxOzZyLdvpBFqHhkFyzFwz2gTOb8oMOqHvGuOf+UtUJW/TxLep5+YFl7okreMtFNC2AfUo7bR77Thzsjg6C6URxeVtyDuFBPDJy/SjDtcgecbE3EoZqwL4GAQkHRIB16SBJw0qehzqKIOu+Qp+7hdGvVB/O/WaWKHAwTSP7ipUO/rFBGI8RaxbmP3HzkiTnjE0nzjxkJvRh2t+vB5zw== jjaimes@binbit.com" exclusive=true
+
+    - name:  Adding user
+      user:  name=jibanez state=present comment="jibanez@binbit.net" groups=developer append=yes shell=/bin/bash
+    - name: Adding authorized_keys
+      authorized_key: user=jibanez key="ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC6MQIHh7MlUpeX4ScqU3DIxYR7/RXF1btZu7ETpmmnhT3dSpR1xu4Yq8rFxgWhOjEBMJnryIKcOyp2Rt2bug2HfHQ4Ifk63StSP4L2nGaCPSocZ05eO2TdCyVazSL3KtnJzSaRG6jsEGmpg8VWf29FM/qVAmOGhljgLJKXaPexXXuvivGEIvZ0iK1WOnZmC4sQ2GXpZUMl+3ZfEReHAhE70Br4rBE0Bskdk5qHytVziQ8XY5FaEso9FAZ3F/DDWh+sFDrH7mlQwRYQw5k045N9nj17SZ7/ZiY1IlC6m47oe5XAfbYDbFoQSsm/s9rmPJU+X9paUH3BKtieQOUWlnVN jibanez" exclusive=true
+
+    - name:  Adding user
+      user:  name=jduenez state=present comment="jduenez@binbit.net" groups=developer append=yes shell=/bin/bash
+    - name: Adding authorized_keys
+      authorized_key: user=jduenez key="ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDXao1D0IjPjfhdFic5+mZA3E/eV7GEdgmVGslCA5i1wQfsUQGum3cbXYrDrAg2kmla2PkWw5Xthj7/yJyVJ3Li8OmPbnJd95NMuZpailEDFN9TB0OyVQFReKQXtBDmJ9TYbrn6Wg+z6HyunYtP1fJJ937jzQdNAbb8OrkL8B10UUp2vNQEN4MGmpR2Xgwc5bao0aHdgGVXI34KT8+kIztd+3iNlcSUsAVK378atGIMOQHlTBSg7ORAFL0h7BI5b9MOAj45OO2NC6fJGzVjnJrjX8vaqLvH+eE9F1pD+UmHJfaMJqvwA2Bf+JZvxWzqWFRjyEzPnnKRrnAShxfVFF37 jduenez" exclusive=true
+
+    - name:  Adding user
+      user:  name=clopez state=present comment="clopez@binbit.net" groups=developer append=yes shell=/bin/bash
+    - name: Adding authorized_keys
+      authorized_key: user=clopez key="ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDkKseKJnHRVpm4kwzhj9eT2y4U6lyT3q8GG3ghI5EEHtTx4A8P74CPQkJRVblitF0NGRDLxM2Pv+fz8igqQk21/dG/ECmjO6fjbJVRIYmJ0Cr5056ifJX9Lb6naCMUGN+sTHkGTtSwgmZlHdjXS/9oZSCHFbBFwV3uS7V8Wc67phVrRK0WBK7ElVCeQNMrUEeTwTbhnBorR8UWiJlBiZRsqDUAVnPREB/h1pH4XhpihoSiz3tinwsfLD0UeYMEWf/vpu76BV7/5DRQkk1Ya2WWJIedexdUeSgvDlam7xCXIj7+FPMg8kj0HpYhCO5Y7qUiLurUujWoIfsvXENuFFjp" exclusive=true
+
+
+    - name:  Adding user
+      user:  name=rmontemayor state=present comment="rmontemayor@binbit.net" groups=developer append=yes shell=/bin/bash
+    - name: Adding authorized_keys
+      authorized_key: user=rmontemayor key="ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQD3bwLPadMp6vnMiEW45NLRZdQGG/q9zT4oyrREN5KKW/Q3/MmnwAtsaCTauelcawoPhCIOw0w6WF9ATnJDXRTBntB3UzHbFdyv8HyTXh6BWze5gdbAc+APQ1wraAY4sgoaxfAha5OX2lFYMXDRL+V0UU06Q0q3VXa5VeIrv09bJR1WhUO6d8SaKCNw2RUCltoh9oh2hcFmoaCgWtkhihTA3sDR1XpMclPlqUyRImYpSn/k5LOHKAPL44Dm0eAcG6HX6rxtIQvuWEwYet9SFfXJ2Lvccsf3yrWYYzmNeBxrg5wqbKst3ms2AEX2ALTMTwSTh4jLe3AuegC0GRjyY3zr rmontemayor" exclusive=true
+
+    - name:  Adding user
+      user:  name=rbresler state=present comment="rbresler@binbit.net" groups=developer append=yes shell=/bin/bash
+    - name: Adding authorized_keys
+      authorized_key: user=rbresler key="ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDIDl7ai7a3TWPlmJeRRpeDRUCIBp7MrQTGPv5cuL4Ce5iqNav7CHNRHV2Sm8cHYkEKKAU25YrfspJGRULYQNDBwgUCEpGXlzRKnYRi9DGf72VTtVi6GVO3wQRxJp3PGKb8Uoy494mot0uHhIWrKsZF47JWV5IPrDsRJavanIhEtI7PA/lRnI6TxluyQAtfeIgsMPcwRbTWr2Lfgf29YRZUz7spI/+CMAZT7TT5M8jGO+NoF//tzC3xTyC6+pBc2AjUNLsh5RNP88iRgHMGKO3Sa+u5V5+qRUHcgo7VZtJ4VaY03ujgRVITXMkY78Oznoc8mXgUCBPq8kLsa7Q9tTZ/ ruben" exclusive=true
+
+    - name:  Adding user
+      user:  name=rfernandez state=present comment="rfernandez@binbit.net" groups=developer append=yes shell=/bin/bash
+    - name: Adding authorized_keys
+      authorized_key: user=rfernandez key="ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC3GYySn0hcl3dU0G4uVO85t6zh0gp3f21XPpIVJPkySgXzHcX/MXB4WpYFzD91hBXjlmrggHoc+IUuGydx9ul4rybUSYhSLjIoPtJsl5z03ftWprYR9KvlqzpJSircYRn1tBdHWGXQdEQ8GdUJoZz/AvEFr4/vqnTt119cVDpD/zkaVfrrv9vmezAb2J+w6yLyLNKtMJTd6YyV3fuNaVQA65CnErmmdEkRZiES42Daw4uzC4x2P3puwRiLfeQADJpvOawxiCUDNb3fZeajF0WKVx7BLwl4sejGPsdPHh2+QyxZs4EX5GNZw0aX+Zrsxw+Dr1KxvL4Kfq0MTpmoFUBv rfernandez" exclusive=true      
+         
+    - name:  Adding user
+      user:  name=uluna state=present comment="uluna@binbit.net" groups=developer append=yes shell=/bin/bash
+    - name: Adding authorized_keys
+      authorized_key: user=uluna key="ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCwxvXn8ugELQdWjmlowDgxDPEU4BtMQYuuJIfuT0u2D9pwNUUfe08QkO+JM6pXaZ8F2IeZY2ObPTKDhjaR4G85YFocSFvnwH8LxyE/dfxCM8OxWWIfXW/fMXVrXy5NtDIMFbMOC3my6RRGPPZOa082A+k8GzJAOhz/chbk5fUXUI3rU0z2QzMSQIHOcFLeP9/minV3i4DOLy+K8uqqxlkxauxOScVNYaaYiFex0Cyr3Jh0N6paSELm4MBoBL2RD1CzDRaQdaOFntS0Fz8Zw9llY6xRYg08jx/o4a5FjZRSHvsSyaxH+bH5RX6XFFqPH3ckJBS/Hui/F1Or5kUYBTb1 uluna" exclusive=true     
+                     
+    - name:  Adding user
+      user:  name=jcabrera state=present comment="jcabrera@binbit.net" groups=developer append=yes shell=/bin/bash
+    - name: Adding authorized_keys
+      authorized_key: user=jcabrera key="ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC1Edn1Rk1sWcVbrUy8MOvXV3A+zK7MSMmsk4HXrnza9A7hJIU4CXvk6BL2GkLjI2+wI/9L3WEJK6qlgdOr6s8n+HBNPRVcNsWrwMeX/exkACqDU47h8yHERoM+a6yfbTn3pbZEW1HxYq0ohb3R8BtQ+9JW+sLEDkd9GteDnotcjEoHnGMAtX0W+lHAoiDZJnfmyzB2QQD3dGD6jxVUI0gcJ66L/3UxFiOtyCStmVW9kmUHWdWaXsShytokFa11zK9/RzF6VNZecb/+jqxNMWyvtdTAOibY7izeJxHjj4oTLmiqShydypMS28rNQ/BsoXsOED9EwxJvAaDi5586ucyx jcabrera@MacBook-Pro-de-jjjericu.local" exclusive=true
+      
+    - name:  Adding user
+      user:  name=jsanchez state=present comment="jsanchez@binbit.net" groups=developer append=yes shell=/bin/bash
+    - name: Adding authorized_keys
+      authorized_key: user=jsanchez key="ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCviwCT/fjNwUzG8we1B8WmPSkz/Vndq7b1eVWtGX3E5eLRP5q83ZMCVjDtMjUfqkLxjITiGBC8g3Rn4vvZgrPyU2qKNZmjCrzxdTJd6rfqy0nXpqlNgg7WWZ9L6uXD7xTrJ3+sJIl1PohAwGPmFKDL3RM8C2RDLywv/lkWyTOoINggY53FDebOACODzZQMSIEit5L/JsmdNT0GCG2uu5tBNAN2XCBYNy9sMfdEW/xLJPtlOIADbNnv/HubHxunqaGSjOArqwfWHDQag4o1VYbHXDfOAsEIox+3C80R8l/B2yVLfZQZdsqGDInSJ/wkotGYbdm1ttnbngY0xdUhLgm9 jsanchez" exclusive=true
+  
+    - name:  Adding user
+      user:  name=saiful state=present comment="saiful@binbit.net" groups=developer append=yes shell=/bin/bash
+    - name: Adding authorized_keys
+      authorized_key: user=saiful key="ssh-rsa AAAAB3NzaC1yc2EAAAABJQAAAQEAqTM0mG4+BhNikQXbaYjxDjYCsLLzq3zUM2uXwsG9SPs6izVXULsPXJRFlQWqQXFO9IfeiWT5t00gv55EWxIfEPX+kVAO9Uq+KoJ7LChiSgb2ONSJ9biZD5V5taSysTqjK2U+jq4J8jjRHAK7hdtUGjSXScMvP/scMuxGMs0g5MscRBDQ2LxH7UNGYIqhbNJz8dHmeoPPAORMAma0CGjHOkBcHNzJTg+Xr0u3BfqsR0gFMrlkSJR3acLWz4s1+OQC5ihJvQ2gkYHOQoeH3+lbGmaEfvbGuR0HC6/6WpEApyOXeH2ANFTR5rdtFJS+nV6dMpQMqtbkEFrgm1oTGZLb3w== saiful" exclusive=true
+
+    - name:  Adding user
+      user:  name=ahsan state=present comment="ahsan@binbit.net" groups=developer append=yes shell=/bin/bash
+    - name: Adding authorized_keys
+      authorized_key: user=ahsan key="ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCyld/Vh3Xhxe/mQsxYqffQMNzyvFre7CQpgcJM05gW4owY5+HJqY7pxPzqe2Q7QiqiG+DcYJe/QPfp8pQTwxxdrYO2rQfS72QKLWFp2953lDhWFRW1wrBLmFad74zHhn05TnZb9F7/DfcQPVttyjpg0VejY6FdgJPDzw8AbGE21QLq7O8Fh9xb1a/djCe+Bw8D5+crmsR0vluKvFkMn/e+/ECHV5wmPM/bZbhzNp8De1Ju2P3iEUDRaTvfnaQM65cGuESJ4LYD5FcsZZ3Klc+JGPfH+pNjijABlMLIXpUQkrpERJg2nVIBI+sj+X0Jv0hdo9y4oKL3cYUYZNK1M/99 ahsan" exclusive=true      
+         

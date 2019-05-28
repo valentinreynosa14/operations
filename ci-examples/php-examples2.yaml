@@ -1,0 +1,35 @@
+variables:
+  DEPLOY_DIR: /home/platform/deploy
+  RELEASE_DIR: /var/www
+  #DEV_DIR: /var/www/dev/
+
+deploy_master:
+  stage: deploy
+  script:
+    - ctag=`git describe`
+    
+    - ifconfig
+    - whoami
+    - echo $PWD
+    
+    - touch .env
+    - cat .env.example > .env
+    
+    - composer install
+    - "[ -f storage/logs/lumen.log ] && rm storage/logs/lumen.log"
+    
+    - ssh platform@159.69.8.150 mkdir -p $DEPLOY_DIR/$ctag/svdigicel
+    - ssh platform@159.69.8.150 mkdir -p $RELEASE_DIR/svdigicel
+    
+    - rsync -azv * platform@159.69.8.150:$DEPLOY_DIR/$ctag/svdigicel/
+    - rsync -azv .env platform@159.69.8.150:$DEPLOY_DIR/$ctag/svdigicel/
+    
+    - ssh platform@159.69.8.150 chmod -R 777 $DEPLOY_DIR/$ctag/svdigicel/storage
+    - ssh platform@159.69.8.150 chmod -R 777 $RELEASE_DIR/svdigicel/vendor/intouch/laravel-newrelic/.git/objects/pack
+    - ssh platform@159.69.8.150 cp -a $DEPLOY_DIR/$ctag/svdigicel $RELEASE_DIR
+  only:
+    - master
+  tags:
+    - master
+  environment: production
+

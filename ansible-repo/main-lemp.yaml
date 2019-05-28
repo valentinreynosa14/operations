@@ -1,0 +1,6 @@
+---
+- hosts: microplat
+  tasks:
+
+- include: ./playbooks/devs-keys.yaml
+- include: ./playbooks/lemp.yaml

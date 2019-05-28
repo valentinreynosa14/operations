@@ -1,0 +1,69 @@
+---
+- hosts: microplat
+
+  tasks:
+  - name: Allow everything and enable UFW
+    ufw:
+      state: enabled
+      policy: allow
+
+  - name: Set logging
+    ufw:
+      logging: on
+
+# ufw supports connection rate limiting, which is useful for protecting
+# against brute-force login attacks. ufw will deny connections if an IP
+# address has attempted to initiate 6 or more connections in the last
+# 30 seconds. See  http://www.debian-administration.org/articles/187
+# for details. Typical usage is:
+  - ufw:
+      rule: limit
+      port: ssh
+      proto: tcp
+
+# Allow OpenSSH. (Note that as ufw manages its own state, simply removing
+# a rule=allow task can leave those ports exposed. Either use delete=yes
+# or a separate state=reset task)
+  - ufw:
+      rule: allow
+      name: OpenSSH
+    
+  - name: Allow all access to tcp port 80
+    ufw:
+      rule: allow
+      port: 80
+      proto: tcp
+
+  - name: Allow all access to tcp port 6556 to check_mk service
+    ufw:
+      rule: allow
+      port: 6556
+      proto: tcp  
+
+  - name: Allow all access to tcp port 5432 to postgres service
+    ufw:
+      rule: allow
+      port: 5432
+      proto: tcp 
+
+  - name: Allow all access to tcp port 3002 to pgadmin postgres admin 
+    ufw:
+      rule: allow
+      port: 3002
+      proto: tcp    
+
+  - name: Allow all access from binbit office
+    ufw:
+      rule: allow
+      src: "{{ item }}"
+    with_items:
+      - 159.69.216.199/32
+      - 187.178.236.222/32
+      - 187.178.207.223/32        
+
+
+
+
+
+
+

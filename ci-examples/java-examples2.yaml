@@ -1,0 +1,35 @@
+variables:
+  DEPLOY_DIR: /platform/deploy/micro_platforms/co_tigo
+  CURRENT_VERSION: /platform/release/micro_platforms/co_tigo/current_version
+  OLD_VERSION: /platform/release/micro_platforms/co_tigo/old_version
+
+deploy_master:
+  stage: deploy
+  script:
+    - ctag=`git describe --always`
+    - chmod +x gradlew
+    - ./gradlew assemble
+    - ssh platform@co.tigo.wapsite.com cp -a $CURRENT_VERSION/. $OLD_VERSION
+    - scp build/libs/binbit-*.jar platform@co.tigo.wapsite.com:/$CURRENT_VERSION/
+  only:
+    - master
+  tags:
+    - master
+  environment: production
+
+build_dev:
+  stage: deploy
+  script:
+    - ctag=current
+    - chmod +x gradlew
+    - ./gradlew assemble
+    - rm -rf $DEPLOY_DIR/$ctag/co_tigo
+    - mkdir -p $DEPLOY_DIR/$ctag/co_tigo
+    - cp -R * $DEPLOY_DIR/$ctag/co_tigo
+    - cd $DEPLOY_DIR/$ctag/co_tigo/
+  only:
+    - dev
+  tags:
+    - dev
+  environment: dev
+

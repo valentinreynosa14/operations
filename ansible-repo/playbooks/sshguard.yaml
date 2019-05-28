@@ -1,0 +1,19 @@
+---
+- hosts: microplat
+
+  tasks:
+  - name: update apt
+    apt: update_cache=yes
+
+  - name: ensure sshguard packages installed 
+    apt: 
+      pkg:
+        - sshguard
+      state: present    
+
+  - name: copy whitelist file
+    copy: src=/etc/ansible/ansible-sysadmin/templates/whitelist dest=/etc/sshguard
+
+  - name: ensure sshguard service is restarted
+    service: name=sshguard state=restarted
+    become: true

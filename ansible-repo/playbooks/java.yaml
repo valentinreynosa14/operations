@@ -1,0 +1,39 @@
+---
+- hosts: microplat
+  tasks:  
+
+  - name: Instalacion de apps varias
+    action: apt pkg={{ item }} state=installed
+    with_items:
+        - htop
+        - vim
+        - iftop
+        - git        
+  - name: Install add-apt-repostory
+    become: true
+    apt: name=software-properties-common state=latest
+    
+  - name: Add Oracle Java Repository
+    become: true
+    apt_repository: repo='ppa:webupd8team/java'
+
+  - name: Accept Java 8 License
+    become:  true
+    debconf: name='oracle-java8-installer' question='shared/accepted-oracle-license-v1-1' value='true' vtype='select'
+
+  - name: Install Oracle Java 8
+    become: true
+    apt: name={{item}} state=latest
+    with_items:
+        - oracle-java8-installer
+        - ca-certificates
+        - oracle-java8-set-default
+        
+  - name: Add the java home path to enviroment
+    lineinfile:
+        path:   /etc/environment
+        state:  present
+        regexp: '^JAVA_HOME'
+        line:   'JAVA_HOME="/usr/lib/jvm/java-8-oracle/jre/bin/java" '  
+        
+
